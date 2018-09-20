@@ -1,0 +1,18 @@
+{
+  "name": "stream-pucks-controller",
+  "version": "1.0.0",
+  "description": "asdf",
+  "main": "index.js",
+  "scripts": {
+    "cert": "node bin/generate_cert.js server",
+    "start": "node services/backend"
+  },
+  "keywords": [
+    "twitch",
+    "extension"
+  ],
+  "author": "Michael Curtis <contact@streamgenie.tv>",
+  "license": "Apache-2.0",
+  "dependencies": {
+  }
+}
