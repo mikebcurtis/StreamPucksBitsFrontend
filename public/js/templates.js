@@ -70,6 +70,6 @@ templates['store'] = template({"1":function(container,depth0,helpers,partials,da
     + "    </div>\r\n</div>\r\n";
 },"useData":true});
 templates['tabs'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div id=\"tabsContainer\">\r\n	<div class=\"active\" id=\"launchTab\">Launch</div>\r\n	<div id=\"getPucksTab\">+Pucks</div>\r\n	<div id=\"storeTab\">Upgrades</div>\r\n	<div id=\"aboutTab\">About</div>\r\n</div>";
+    return "<div id=\"tabsContainer\">\r\n	<div class=\"active\" id=\"launchTab\">Launch</div>\r\n	<div id=\"getPucksTab\">Get Pucks</div>\r\n	<div id=\"storeTab\">Upgrades</div>\r\n	<div id=\"aboutTab\">About</div>\r\n</div>";
 },"useData":true});
 })();

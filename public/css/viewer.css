@@ -68,7 +68,7 @@ h2 {
     display: block;
     width: 100%;
     padding: 1px;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
     text-align: center;
     background-color: #02111b;
@@ -83,6 +83,7 @@ h2 {
     color: #02111b;
     text-shadow: 0px 0px 10px rgb(14, 65, 68, 0.8), 0 0 1px rgb(14, 65, 68, 1);
     box-shadow: 0 0 10px rgba(42, 237, 251, 1);
+    font-size: 13px;
 }
 #controlsContainer {
     margin-top: 5px;
