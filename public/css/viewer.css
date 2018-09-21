@@ -291,6 +291,20 @@ input[type=text] {
     box-shadow: 0 0 10px rgba(42, 237, 251, 1);
 }
 
+.bitsPurchaseButton {
+    align-content: flex-end;
+    height: 23px;
+    width: 79px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #02111b;
+    color: rgb(42, 237, 251);
+    text-shadow: 0px 0px 6px rgba(42, 237, 251, 0.7);
+    border: 2px solid rgb(42, 237, 251);
+    box-shadow: 0 0 10px rgba(42, 237, 251, 1);
+}
+
 .purchaseButton:hover {
     background-color: rgb(42, 237, 251);
     color: #02111b;

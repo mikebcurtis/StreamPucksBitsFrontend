@@ -1,0 +1,23 @@
+<div id="storeContainer">
+    <p>Your bits purchase supports this streamer! Breakdown: 80% streamer, 20% developer.</p>
+    <div class="items">
+        {{#each products}}
+        <div class="item">
+            <div id="trailImgContainer">
+                <!-- <img id="trailImg" src="img/{{ id }}.png" /> -->
+                <div id="purchaseButtonContainer">
+                    <button class="bitsPurchaseButton" id="{{ sku }}" name="inactivated">{{ cost.amount }} Bits</button>
+                </div>
+            </div>
+            <div id="trailDescriptionContainer">
+                <h2>{{ displayName }}</h2>
+                <p>Cost: {{ cost.amount }} bits</p>
+                <div id="errorMessage">
+                    <p><span id="error"></span></p>
+                </div>
+            </div>
+
+        </div>
+        {{/each}}
+    </div>
+</div>
