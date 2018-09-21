@@ -9,37 +9,58 @@ templates['authorize'] = template({"compiler":[7,">= 4.0.0"],"main":function(con
 templates['authorize_fail'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Log in failed</h1>";
 },"useData":true});
+templates['getpucks'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=container.lambda;
+
+  return "        <div class=\"item\">\r\n            <div id=\"trailImgContainer\">\r\n                <!-- <img id=\"trailImg\" src=\"img/"
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + ".png\" /> -->\r\n                <div id=\"purchaseButtonContainer\">\r\n                    <button class=\"bitsPurchaseButton\" id=\""
+    + alias4(((helper = (helper = helpers.sku || (depth0 != null ? depth0.sku : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"sku","hash":{},"data":data}) : helper)))
+    + "\" name=\"inactivated\">"
+    + alias4(alias5(((stack1 = (depth0 != null ? depth0.cost : depth0)) != null ? stack1.amount : stack1), depth0))
+    + " Bits</button>\r\n                </div>\r\n            </div>\r\n            <div id=\"trailDescriptionContainer\">\r\n                <h2>"
+    + alias4(((helper = (helper = helpers.displayName || (depth0 != null ? depth0.displayName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"displayName","hash":{},"data":data}) : helper)))
+    + "</h2>\r\n                <p>Cost: "
+    + alias4(alias5(((stack1 = (depth0 != null ? depth0.cost : depth0)) != null ? stack1.amount : stack1), depth0))
+    + " bits</p>\r\n                <div id=\"errorMessage\">\r\n                    <p><span id=\"error\"></span></p>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div id=\"storeContainer\">\r\n    <p>Your bits purchase supports this streamer! Breakdown: 80% streamer, 20% developer.</p>\r\n    <div class=\"items\">\r\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.products : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </div>\r\n</div>";
+},"useData":true});
 templates['header'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<div id=\"avatarContainer\">\r\n    <img id=\"avatarImg\" src=\""
-    + alias2(alias1((depth0 != null ? depth0.avatarUrl : depth0), depth0))
+    + alias4(((helper = (helper = helpers.avatarUrl || (depth0 != null ? depth0.avatarUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"avatarUrl","hash":{},"data":data}) : helper)))
     + "\" />\r\n</div>\r\n<div id=\"userNameContainer\">\r\n    <h1><span id=\"userName\">"
-    + alias2(alias1((depth0 != null ? depth0.userName : depth0), depth0))
+    + alias4(((helper = (helper = helpers.userName || (depth0 != null ? depth0.userName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"userName","hash":{},"data":data}) : helper)))
     + "</span></h1>\r\n    <h3>Pucks: <span id=\"totalPucks\">"
-    + alias2(alias1((depth0 != null ? depth0.totalPucks : depth0), depth0))
+    + alias4(((helper = (helper = helpers.totalPucks || (depth0 != null ? depth0.totalPucks : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"totalPucks","hash":{},"data":data}) : helper)))
     + "</span></h3>\r\n    <h3>Score: <span id=\"playerScore\">"
-    + alias2(alias1((depth0 != null ? depth0.playerScore : depth0), depth0))
+    + alias4(((helper = (helper = helpers.playerScore || (depth0 != null ? depth0.playerScore : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"playerScore","hash":{},"data":data}) : helper)))
     + "</span></h3>\r\n</div>";
 },"useData":true});
 templates['launch'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div id=\"controlsContainer\">\r\n    <div id=\"leftLauncherController\">\r\n        <div id=\"launcherImgContainer\">\r\n            <img src=\"img/launcher_left.png\" id=\"leftAngleImg\" alt=\"Left launcher\">\r\n        </div>\r\n        <div class=\"angleDisplay\">\r\n            <p><span id=\"leftAngleDisplay\">Angle:</span></p>\r\n        </div>  \r\n        <div class=\"angleContainer\">\r\n            <input type=\"range\" min=\"0\" max=\"90\" value=\"45\" class=\"leftAngleSlider\" id=\"leftAngleSlider\">\r\n        </div>\r\n        <div class=\"powerDisplay\">\r\n            <p><span id=\"leftPowerDisplay\"></span></p>\r\n        </div>    \r\n        <div class=\"powerContainer\">\r\n            <input type=\"range\" min=\"1\" max=\"100\" value=\"50\" class=\"leftPowerSlider\" id=\"leftPowerSlider\">\r\n        </div>\r\n        <div class=\"puckNumber\">\r\n            <div id=\"launchTitle\"><h3>How many?<br/>(50 Max)</h3></div>\r\n            <input type=\"text\" id=\"leftLauncher\" class=\"leftLauncher\">\r\n        </div>    \r\n    </div>\r\n    <div id=\"rightLauncherController\">\r\n        <div id=\"launcherImgContainer\">\r\n            <img src=\"img/launcher_right.png\" id=\"rightAngleImg\" alt=\"Right launcher\">\r\n        </div>\r\n        <div class=\"angleDisplay\">\r\n            <p><span id=\"rightAngleDisplay\">Angle:</span></p>\r\n        </div>  \r\n        <div class=\"angleContainer\">\r\n            <input type=\"range\" min=\"0\" max=\"90\" value=\"45\" class=\"rightAngleSlider\" id=\"rightAngleSlider\">\r\n        </div>\r\n        <div class=\"powerDisplay\">\r\n            <p><span id=\"rightPowerDisplay\"></span></p>\r\n        </div>  \r\n        <div class=\"powerContainer\">\r\n            <input type=\"range\" min=\"1\" max=\"100\" value=\"50\" class=\"rightPowerSlider\" id=\"rightPowerSlider\">\r\n        </div>\r\n        <div class=\"puckNumber\">\r\n            <div id=\"launchTitle\"><h3>How many?<br/>(50 Max)</h3></div>\r\n            <input type=\"text\" id=\"rightLauncher\" class=\"rightLauncher\">\r\n        </div>      \r\n    </div>\r\n</div>\r\n<div class=\"sendButton\">\r\n    <button type=\"button\" class=\"block\" id=\"sendButton\">Launch</button>\r\n</div>\r\n<div class=\"errorMessage\">\r\n    <p><span id=\"error\"></span></p>\r\n</div>";
 },"useData":true});
 templates['store'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "        <div class=\"item\">\r\n            <div id=\"trailImgContainer\">\r\n                <img id=\"trailImg\" src=\"img/"
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + ".png\" />\r\n                <div id=\"purchaseButtonContainer\">\r\n                    <button class=\"purchaseButton\" id=\""
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" name=\"inactivated\">Use Points</button>\r\n                </div>\r\n            </div>\r\n            <div id=\"trailDescriptionContainer\">\r\n                <h2>"
-    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+    + alias4(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"name","hash":{},"data":data}) : helper)))
     + "</h2>\r\n                <p>"
-    + alias2(alias1((depth0 != null ? depth0.description : depth0), depth0))
+    + alias4(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper)))
     + "</p>\r\n                <p>Cost: "
-    + alias2(alias1((depth0 != null ? depth0.cost : depth0), depth0))
+    + alias4(((helper = (helper = helpers.cost || (depth0 != null ? depth0.cost : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"cost","hash":{},"data":data}) : helper)))
     + " points</p>\r\n                <div id=\"errorMessage\">\r\n                    <p><span id=\"error "
-    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\"></span></p>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -49,6 +70,6 @@ templates['store'] = template({"1":function(container,depth0,helpers,partials,da
     + "    </div>\r\n</div>\r\n";
 },"useData":true});
 templates['tabs'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div id=\"tabsContainer\">\r\n	<div class=\"active\" id=\"launchTab\">Launch</div>\r\n	<div id=\"storeTab\">Upgrades</div>\r\n	<div id=\"aboutTab\">About</div>\r\n</div>";
+    return "<div id=\"tabsContainer\">\r\n	<div class=\"active\" id=\"launchTab\">Launch</div>\r\n	<div id=\"getPucksTab\">+Pucks</div>\r\n	<div id=\"storeTab\">Upgrades</div>\r\n	<div id=\"aboutTab\">About</div>\r\n</div>";
 },"useData":true});
 })();

@@ -39,6 +39,7 @@ var TwitchUserManager = (function(){
     var userInfo;
     var newUser = true;
     var currentPuckCount;
+    var bitsProducts;
 
     var sendUserInfo = function(){
         $.ajax({
@@ -70,7 +71,9 @@ var TwitchUserManager = (function(){
         });
     }
 
-
+    var setBitsProducts = function(rawProducts) {
+        bitsProducts = {"products" : rawProducts};
+    };
 
     return {
         // public members
@@ -131,6 +134,13 @@ var TwitchUserManager = (function(){
                 }
             });
             EBSManager.initStoreItems(twitchAuth, payload);
+            Twitch.ext.bits.getProducts().then(response => {
+                console.log(response);
+                setBitsProducts(response);
+            });
+        },
+        getBitsProducts: function() {
+            return bitsProducts;
         }
     };
 })();
@@ -326,6 +336,11 @@ var TemplateManager = (function(){
                 $('.active').removeClass("active");
                 $(this).addClass("active");
             });
+            $("#getPucksTab").click(function () {
+                TemplateManager.LoadGetPucksTemplate(TwitchUserManager.getBitsProducts());
+                $('.active').removeClass("active");
+                $(this).addClass("active");
+            });
             $("#storeTab").click(function () {
                 if ($("#launchTab").hasClass("active")) {
                     EBSManager.setCurrentLauncherValues($("#leftAngleSlider").val(), $("#rightAngleSlider").val(),
@@ -343,6 +358,17 @@ var TemplateManager = (function(){
                 TemplateManager.LoadAboutTemplate();
                 $('.active').removeClass("active");
                 $(this).toggleClass("active");
+            });
+        },
+        LoadGetPucksTemplate: function(items) {
+            var getPucksTemplate = Handlebars.templates.getpucks;
+            $("#main").html(getPucksTemplate(items));
+            $(".bitsPurchaseButton").mouseover(function () {
+                Twitch.ext.bits.showBitsBalance();
+            });
+            $(".bitsPurchaseButton").click(function () {
+                var sku = $(this).attr('id');
+                Twitch.ext.bits.useBits(sku);
             });
         },
         LoadStoreTemplate: function (storeItems, purchasedItems) {
