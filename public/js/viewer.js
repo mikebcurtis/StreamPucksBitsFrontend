@@ -134,9 +134,30 @@ var TwitchUserManager = (function(){
                 }
             });
             EBSManager.initStoreItems(twitchAuth, payload);
+            Twitch.ext.bits.setUseLoopback(true); // DEBUG this allows for testing bits without actually using them
+            Twitch.ext.bits.onTransactionComplete(TwitchUserManager.transactionCompleteHandler);
             Twitch.ext.bits.getProducts().then(response => {
                 console.log(response);
                 setBitsProducts(response);
+            });
+        },
+        transactionCompleteHandler: function(transaction) {
+            console.log(transaction); // DEBUG
+            $.ajax({
+                url: EBSManager.getLogTransactionUrl(twitchAuth.channelId, payload.user_id),
+                type: 'POST',
+                headers: {
+                    'x-extension-jwt': twitchAuth.token
+                },
+                data: transaction,
+                success: function (result) {
+                    var responseElementId = "responseMessage-" + transaction.product.sku;
+                    document.getElementById(responseElementId).innerHTML = "Purchase successful! If the game is not live, your pucks won't appear until the game is played.";
+                },
+                error: function (request, status, error) {
+                    document.getElementById("error").innerHTML = "Error: " + request.responseText;
+                }
+
             });
         },
         getBitsProducts: function() {
@@ -368,6 +389,7 @@ var TemplateManager = (function(){
             });
             $(".bitsPurchaseButton").click(function () {
                 var sku = $(this).attr('id');
+                console.log("clicked purchase button"); // DEBUG
                 Twitch.ext.bits.useBits(sku);
             });
         },
@@ -633,19 +655,23 @@ var EBSManager = (function () {
         },
 
         getWildUserAppearsUrl: function(channelId, userId, opaqueUserId){
-            return getHost() + '/wildUserAppears?channelId=' + channelId + '&playerId=' + userId + '&opaqueUserId=' + opaqueUserId;
+            return getHost() + 'wildUserAppears?channelId=' + channelId + '&playerId=' + userId + '&opaqueUserId=' + opaqueUserId;
         },
 
         getPopulateStoreItemsUrl: function(channelId, playerId) {
-            return getHost() + '/populateStoreItems?channelId=' + channelId + '&playerId=' + playerId;
+            return getHost() + 'populateStoreItems?channelId=' + channelId + '&playerId=' + playerId;
         },
 
         getQueueLaunchUrl: function (channelId, userId) {
-            return getHost() + '/queueLaunch?channelId=' + channelId + '&playerId=' + userId;
+            return getHost() + 'queueLaunch?channelId=' + channelId + '&playerId=' + userId;
         }, 
 
         getPurchasePointsUpdateUrl: function(channelId, playerId, storeItemId) {
-            return getHost() + '/purchasePointsUpdate?channelId=' + channelId + '&playerId=' + playerId + '&storeItemId=' + storeItemId;
+            return getHost() + 'purchasePointsUpdate?channelId=' + channelId + '&playerId=' + playerId + '&storeItemId=' + storeItemId;
+        },
+
+        getLogTransactionUrl: function(channelId, playerId) {
+            return getHost() + 'logTransaction?channelId=' + channelId + '&playerId=' + playerId;
         }
     };
 })();
@@ -658,5 +684,3 @@ $(document).ready(function () {
 
 //get twitch auth values
 window.Twitch.ext.onAuthorized(TwitchUserManager.setAuth);
-
-

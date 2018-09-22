@@ -10,23 +10,23 @@ templates['authorize_fail'] = template({"compiler":[7,">= 4.0.0"],"main":functio
     return "<h1>Log in failed</h1>";
 },"useData":true});
 templates['getpucks'] = template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=container.lambda;
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "        <div class=\"item\">\r\n            <div id=\"trailImgContainer\">\r\n                <!-- <img id=\"trailImg\" src=\"img/"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + ".png\" /> -->\r\n                <div id=\"purchaseButtonContainer\">\r\n                    <button class=\"bitsPurchaseButton\" id=\""
     + alias4(((helper = (helper = helpers.sku || (depth0 != null ? depth0.sku : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"sku","hash":{},"data":data}) : helper)))
     + "\" name=\"inactivated\">"
-    + alias4(alias5(((stack1 = (depth0 != null ? depth0.cost : depth0)) != null ? stack1.amount : stack1), depth0))
+    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.cost : depth0)) != null ? stack1.amount : stack1), depth0))
     + " Bits</button>\r\n                </div>\r\n            </div>\r\n            <div id=\"trailDescriptionContainer\">\r\n                <h2>"
     + alias4(((helper = (helper = helpers.displayName || (depth0 != null ? depth0.displayName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"displayName","hash":{},"data":data}) : helper)))
-    + "</h2>\r\n                <p>Cost: "
-    + alias4(alias5(((stack1 = (depth0 != null ? depth0.cost : depth0)) != null ? stack1.amount : stack1), depth0))
-    + " bits</p>\r\n                <div id=\"errorMessage\">\r\n                    <p><span id=\"error\"></span></p>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n";
+    + "</h2>\r\n                <p id=\"responseMessage-"
+    + alias4(((helper = (helper = helpers.sku || (depth0 != null ? depth0.sku : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"sku","hash":{},"data":data}) : helper)))
+    + "\"></p>\r\n            </div>\r\n\r\n        </div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div id=\"storeContainer\">\r\n    <p>Your bits purchase supports this streamer! Breakdown: 80% streamer, 20% developer.</p>\r\n    <div class=\"items\">\r\n"
+  return "<div id=\"storeContainer\">\r\n    <p>Your bits purchase supports this streamer! Breakdown: 80% streamer, 20% developer.</p>\r\n    <div id=\"errorMessage\">\r\n        <p><span id=\"error\"></span></p>\r\n    </div>\r\n    <div class=\"items\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.products : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </div>\r\n</div>";
 },"useData":true});

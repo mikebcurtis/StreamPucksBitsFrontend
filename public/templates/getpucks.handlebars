@@ -1,5 +1,8 @@
 <div id="storeContainer">
     <p>Your bits purchase supports this streamer! Breakdown: 80% streamer, 20% developer.</p>
+    <div id="errorMessage">
+        <p><span id="error"></span></p>
+    </div>
     <div class="items">
         {{#each products}}
         <div class="item">
@@ -11,10 +14,7 @@
             </div>
             <div id="trailDescriptionContainer">
                 <h2>{{ displayName }}</h2>
-                <p>Cost: {{ cost.amount }} bits</p>
-                <div id="errorMessage">
-                    <p><span id="error"></span></p>
-                </div>
+                <p id="responseMessage-{{ sku }}"></p>
             </div>
 
         </div>
