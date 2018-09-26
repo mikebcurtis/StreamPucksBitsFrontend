@@ -1,4 +1,3 @@
-
 //Launcher object to be used in JSON for game
 var Launch = function (side, angle, power, pucks) {
     var userInfo = TwitchUserManager.getUserInfo();
@@ -44,7 +43,6 @@ var TwitchUserManager = (function(){
     var sendUserInfo = function(){
         $.ajax({
             url: EBSManager.getWildUserAppearsUrl(twitchAuth.channelId, payload.user_id, payload.opaque_user_id),
-            //url: 'https://us-central1-twitchplaysballgame.cloudfunctions.net/wildUserAppears?channelId=' + twitchAuth.channelId + '&playerId=' + payload.user_id + '&opaqueUserId=' + payload.opaque_user_id,
             type: 'GET',
             headers: {
                 'x-extension-jwt': twitchAuth.token
@@ -62,7 +60,6 @@ var TwitchUserManager = (function(){
             dataType: 'json',
             headers: {
                 'Accept': 'application/vnd.twitchtv.v5+json',
-                //'Client-ID': 'y4jq5ejqgodi64cueqvjdip2ekfg0r', // no-bits extension
                 'Client-ID': '4ynfkfb761mf5gbcslrgt8ksov8im6' // bits-enabled extension
             }
         }).done(function (response) {
@@ -72,7 +69,26 @@ var TwitchUserManager = (function(){
     }
 
     var setBitsProducts = function(rawProducts) {
-        bitsProducts = {"products" : rawProducts};
+        // reorder the products
+        var productsArr = [];
+        var otherIdx = 3;
+        for (var i = 0; i < rawProducts.length; i++) {
+            var sku = rawProducts[i].sku;
+            switch (sku) {
+                case 'give-100-to-everyone':
+                    productsArr[0] = rawProducts[i];
+                    break;
+                case 'give-10-to-everyone':
+                    productsArr[1] = rawProducts[i];
+                    break;
+                case 'get-100':
+                    productsArr[2] = rawProducts[i];
+                    break;
+                default:
+                    productsArr[otherIdx++] = rawProducts[i];
+            }
+        }
+        bitsProducts = {"products" : productsArr};
     };
 
     return {
@@ -81,7 +97,6 @@ var TwitchUserManager = (function(){
             return currentPuckCount;
         },
         setPuckCount: function(puckCount) {
-            // TODO validate puckCount is int
             currentPuckCount = puckCount;
         },
         getUserInfo: function() {
@@ -134,15 +149,12 @@ var TwitchUserManager = (function(){
                 }
             });
             EBSManager.initStoreItems(twitchAuth, payload);
-            Twitch.ext.bits.setUseLoopback(true); // DEBUG this allows for testing bits without actually using them
             Twitch.ext.bits.onTransactionComplete(TwitchUserManager.transactionCompleteHandler);
             Twitch.ext.bits.getProducts().then(response => {
-                console.log(response);
                 setBitsProducts(response);
             });
         },
         transactionCompleteHandler: function(transaction) {
-            console.log(transaction); // DEBUG
             $.ajax({
                 url: EBSManager.getLogTransactionUrl(twitchAuth.channelId, payload.user_id),
                 type: 'POST',
@@ -389,7 +401,6 @@ var TemplateManager = (function(){
             });
             $(".bitsPurchaseButton").click(function () {
                 var sku = $(this).attr('id');
-                console.log("clicked purchase button"); // DEBUG
                 Twitch.ext.bits.useBits(sku);
             });
         },
@@ -417,7 +428,6 @@ var TemplateManager = (function(){
             $(".purchaseButton").click(function () {
                 var buttonType = $(this).html();
                 var itemId = $(this).attr('id');
-                //var activeItem = document.getElementsByName("active");
                 var activeItem = $("[name='activated']");
                 if (buttonType === "Use Points") {
                     $(this).html("Confirm?");
@@ -440,9 +450,6 @@ var TemplateManager = (function(){
                     EBSManager.setCurrentTrail(itemId);
                     EBSManager.setActivePurchasedItem($(this).attr("id"));
                 }
-                //var element = document.getElementsByClassName(className);
-                ////element.style["pointer-events"] = "none";
-                //EBSManager.storePurchasePointsUpdate(className);
             });
         },
         LoadAboutTemplate: function () {
@@ -460,7 +467,7 @@ var EBSManager = (function () {
     var currentLauncherValues;
     var prodHost = 'https://us-central1-twitchplaysballgame.cloudfunctions.net/';
     var stagingHost = 'https://us-central1-streampucksstaging.cloudfunctions.net/';
-    var staging = true; // switch to false to hit the production endpoint
+    var staging = false; // switch to false to hit the production endpoint
     var getHost = function() {
         if (staging) {
             return stagingHost;
@@ -474,7 +481,6 @@ var EBSManager = (function () {
         initStoreItems: function (auth, payload) {
             $.ajax({
                 url: this.getPopulateStoreItemsUrl(auth.channelId, payload.user_id),
-                //url: 'https://us-central1-twitchplaysballgame.cloudfunctions.net/populateStoreItems?channelId=' + auth.channelId + '&playerId=' + payload.user_id,
                 type: 'GET',
                 dataType: 'json',
             }).done(function (response) {
@@ -530,7 +536,6 @@ var EBSManager = (function () {
 
             $.ajax({
                 url: this.getQueueLaunchUrl(twitchAuth.channelId, payload.userId),
-                //url: 'https://us-central1-twitchplaysballgame.cloudfunctions.net/queueLaunch?channelId=' + twitchAuth.channelId + '&playerId=' + payload.userId,
                 contentType: 'application/json',
                 type: 'POST',
                 headers: {
@@ -556,7 +561,6 @@ var EBSManager = (function () {
             $("body").css("cursor", "progress");
             $.ajax({
                 url: this.getPurchasePointsUpdateUrl(twitchAuth.channelId, payload.user_id, storeItemId),
-                //url: 'https://us-central1-twitchplaysballgame.cloudfunctions.net/purchasePointsUpdate?channelId=' + twitchAuth.channelId + '&playerId=' + payload.user_id + '&storeItemId=' + storeItemId,
                 type: 'POST',
                 success: function (result) {
                     var activeItem = $("[name='activated']");

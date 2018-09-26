@@ -1,22 +1,19 @@
 <div id="storeContainer">
-    <p>Your bits purchase supports this streamer! Breakdown: 80% streamer, 20% developer.</p>
-    <div id="errorMessage">
-        <p><span id="error"></span></p>
-    </div>
     <div class="items">
+        <p>Need more pucks?</p>
+        <p>Use the buttons below to exchange bits for more pucks, or give pucks to other players. Your bits directly support this streamer (80%) and the developer (20%)!</p>
+        <div id="errorMessage">
+            <p><span id="error"></span></p>
+        </div>
         {{#each products}}
-        <div class="item">
-            <div id="trailImgContainer">
-                <!-- <img id="trailImg" src="img/{{ id }}.png" /> -->
-                <div id="purchaseButtonContainer">
-                    <button class="bitsPurchaseButton" id="{{ sku }}" name="inactivated">{{ cost.amount }} Bits</button>
-                </div>
+        <div class="getPucksItem">
+            <div id="bitsPurchaseButtonContainer">
+                <button class="bitsPurchaseButton" id="{{ sku }}">{{ cost.amount }} Bits</button>
             </div>
-            <div id="trailDescriptionContainer">
+            <div id="getPucksDescriptionContainer">
                 <h2>{{ displayName }}</h2>
                 <p id="responseMessage-{{ sku }}"></p>
             </div>
-
         </div>
         {{/each}}
     </div>

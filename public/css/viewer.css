@@ -78,6 +78,7 @@ h2 {
     box-shadow: 0 0 10px rgba(42, 237, 251, 1);
     text-decoration: none;
 }
+
 #tabsContainer div.active {
     background-color: rgb(42, 237, 251);
     color: #02111b;
@@ -85,6 +86,7 @@ h2 {
     box-shadow: 0 0 10px rgba(42, 237, 251, 1);
     font-size: 13px;
 }
+
 #controlsContainer {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -96,6 +98,11 @@ h2 {
 #launcherImgContainer {
     height: 70px;
     margin-top: 25px;
+}
+
+#getPucksDescriptionContainer {
+    float: left;
+    margin-left: 10px;
 }
 
 #leftAngleImg, #rightAngleImg {
@@ -245,6 +252,16 @@ input[type=text] {
     text-shadow: 0px 0px 6px rgba(255, 0, 0, 0.7);
 }
 
+.getPucksItem {
+    display: flex;
+    padding: 5px;
+    border: 1px solid rgb(42, 237, 251);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(42, 237, 251, 0.8);
+    min-height: 100px;
+    line-height: normal;    
+}
+
 .item {
     display: flex;
     justify-content: flex-start;
@@ -264,6 +281,7 @@ input[type=text] {
     height: 347px;
     overflow-y: scroll;
 }
+
 .items::-webkit-scrollbar {
     width: auto;
 }
@@ -272,15 +290,21 @@ input[type=text] {
     background-color: rgba(42, 237, 251, 1);
     outline: 1px rgb(42, 237, 251);
 }
+
 #trailImgContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.purchaseButton {
-    align-content: flex-end;
-    height: 23px;
+.bitsPurchaseButtonContainer {
+    float: left;
+    width: 100px;
+}
+
+.bitsPurchaseButton {
+    margin: 5px;
+    height: 80%;
     width: 79px;
     font-size: 13px;
     cursor: pointer;
@@ -292,7 +316,14 @@ input[type=text] {
     box-shadow: 0 0 10px rgba(42, 237, 251, 1);
 }
 
-.bitsPurchaseButton {
+.bitsPurchaseButton:hover {
+    background-color: rgb(42, 237, 251);
+    color: #02111b;
+    text-shadow: 0px 0px 10px rgb(14, 65, 68, 0.8), 0 0 1px rgb(14, 65, 68, 1);
+    box-shadow: 0 0 10px rgba(42, 237, 251, 1);
+}
+
+.purchaseButton {
     align-content: flex-end;
     height: 23px;
     width: 79px;
