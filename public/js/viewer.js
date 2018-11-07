@@ -495,7 +495,17 @@ var EBSManager = (function () {
                         active: false
                     });
                 }
+
+                var channelId = TwitchUserManager.getAuth().channelId;
+
                 for (var j in allItems) {
+                    // check if this item is an exclusive and if this channel has access to it
+                    if (allItems[j].exclusiveTo !== undefined && 
+                        (allItems[j].exclusiveTo[channelId] === undefined ||
+                         allItems[j].exclusiveTo[channelId] == false)) {
+                            continue;
+                    }
+
                     storeItems.items.push({
                         id: j,
                         name: allItems[j].name,
@@ -687,4 +697,5 @@ $(document).ready(function () {
 });
 
 //get twitch auth values
+//window.Twitch.ext.bits.setUseLoopback(true);
 window.Twitch.ext.onAuthorized(TwitchUserManager.setAuth);

@@ -33,6 +33,12 @@ h2 {
     margin-bottom: 5px;
 }
 
+#smallNote {
+    margin: 0px;
+    padding: 0px;
+    font-size: xx-small;
+}
+
 #header {
     padding: 5px;
     border: 1px solid rgb(42, 237, 251);
