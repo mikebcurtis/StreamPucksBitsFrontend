@@ -697,5 +697,5 @@ $(document).ready(function () {
 });
 
 //get twitch auth values
-//window.Twitch.ext.bits.setUseLoopback(true);
+//window.Twitch.ext.bits.setUseLoopback(true); // set this to test bits purchases without using actual bits
 window.Twitch.ext.onAuthorized(TwitchUserManager.setAuth);
